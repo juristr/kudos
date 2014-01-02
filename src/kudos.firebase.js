@@ -1,6 +1,6 @@
 (function($, undefined){
 
-    var firebaseUrl = 'https://juristr.firebaseio.com/kudos',
+    var firebaseUrl = 'https://firekudos.firebaseio.com/kudos',
         key = encodeURIComponent(document.location.pathname),
         kudoStore = new Firebase(firebaseUrl);
 
@@ -25,7 +25,7 @@
     });
 
     // listening for updates
-    var kudoEntry = new Firebase('https://juristr.firebaseio.com/kudos/' + key);
+    var kudoEntry = new Firebase(firebaseUrl + key);
     kudoEntry.on('value', function(snapshot){
         updateKudoCount(snapshot.val()[key].count);
     });
