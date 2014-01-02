@@ -13,6 +13,7 @@
             this.complete = __bind(this.complete, this);
 
             $(document).on('touchstart', this.element, this.start);
+            $(document).on('touchend', this.element, this.stop);
         }
 
         Kudoable.prototype.start = function(){

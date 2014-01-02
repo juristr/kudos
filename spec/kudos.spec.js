@@ -46,7 +46,15 @@ describe('The Kudoable element', function(){
             expect(fixture.hasClass('active')).toBe(false);  
         });
 
-    }); 
+        it('should deactivate itself when stopping to touch before the 700ms', function(){
+           // act
+           kudoable.trigger('touchend');
+
+           // assert
+           expect(fixture.hasClass('active')).toBe(false); 
+        });
+
+    });
 
     describe('when completing', function(){
 
