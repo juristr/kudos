@@ -10,6 +10,7 @@
 
             this.start = __bind(this.start, this);
             this.stop = __bind(this.stop, this);
+            this.complete = __bind(this.complete, this);
 
             $(document).on('touchstart', this.element, this.start);
         }
@@ -19,11 +20,16 @@
             
             this.element.addClass('active');
 
-            setTimeout(this.stop, 700);
+            setTimeout(this.complete, 700);
         };
 
         Kudoable.prototype.stop = function(){
             this.element.removeClass('active');
+        };
+
+        Kudoable.prototype.complete = function(){
+            this.stop();
+            this.element.addClass('complete');
         };
 
         return Kudoable;

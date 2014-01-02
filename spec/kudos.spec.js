@@ -48,6 +48,20 @@ describe('The Kudoable element', function(){
         expect(this._fixture.hasClass('active')).toBe(false);  
     });
 
-    
+    describe('when completing', function(){
+
+
+        it('should add the complete class to the element it is bound to', function(){
+            var kudoable = this._fixture.kudoable();
+
+            // act
+            kudoable.trigger('touchstart');
+            clock.tick(700);
+
+            //assert
+            expect(this._fixture.hasClass('complete')).toBe(true);
+        });
+
+    });
 
 });
