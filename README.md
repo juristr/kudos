@@ -1,11 +1,9 @@
-Kudo (for Firebase)[![Build Status](https://travis-ci.org/juristr/firebase-kudos.png?branch=master)](https://travis-ci.org/juristr/firebase-kudos) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+Kudo for Jekyll (but not only)[![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll)
 ---
 
 This project started as a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
 
-The idea is to give people Kudo support on their own blogs (like [my](http://juristr.com) [Jekyll](http://jekyllrb.com) one) by using a Firebase backend and this script here.
-
-As far as I know, the concept of "Kudos" originally appeared on [Svbtle blogs](https://svbtle.com/).ds
+The idea is to give people with [Jekyll](http://jekyllrb.com) blogs Kudo support which originally (as far as I know) has been introduced on the [Svbtle blog](https://svbtle.com/) engine.
 
 ## Installation
 
@@ -31,7 +29,7 @@ Open `kudos.firebase.js` and change the `firebaseUrl` to have it point to the on
 ```javascript
 ...
 var firebaseUrl = 'https://<yourdb>.firebaseio.com/kudos',
-    ...
+...
 ```
 
 **Step 4 - Init your kudo element**  
@@ -52,4 +50,4 @@ That's it. You should be ready to go.
 
 ## Credits
 
-Credits have to be given to [Amit Upadhyay](http://amitu.com/2013/04/kudos-using-parse-for-jekyll/) who provided the original Kudo implementation by using [Parse](https://parse.com/) as the backend service.
+Credits have to be given to [Amit Upadhyay](http://amitu.com/2013/04/kudos-using-parse-for-jekyll/) who provided the original Svbtle independent Kudo implementation by using [Parse](https://parse.com/) as the backend service.
