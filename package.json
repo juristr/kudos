@@ -1,11 +1,25 @@
 {
   "name": "kudos-jekyll",
   "description": "Kudos for Jekyll",
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "homepage": "https://github.com/juristr/kudos-jekyll",
   "author": {
     "name": "Juri Strumpflohner",
     "email": "juri.strumpflohner@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/juristr/kudos-jekyll.git"
+  },
+  "bugs": {
+    "url": "https://github.com/juristr/kudos-jekyll/issues"
+  },  
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/juristr/kudos-jekyll/blob/master/LICENSE-MIT"
+    }
+  ],  
   "scripts": { "test": "grunt test"},
   "devDependencies": {
     "grunt": "~0.4.1",
