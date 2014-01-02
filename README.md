@@ -1,9 +1,22 @@
-Kudo for Jekyll (but not only)[![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll)
+Kudo for Jekyll (but not only)[![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ---
 
 This project started as a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
 
 The idea is to give people with [Jekyll](http://jekyllrb.com) blogs Kudo support which originally (as far as I know) has been introduced on the [Svbtle blog](https://svbtle.com/) engine.
+
+## Building
+
+Just clone the repo and execute
+
+```
+$ npm install
+$ grunt
+```
+
+This should install the required packages and then compress the required files and copy them to the `dist` directory.
+
+> Note, you need to have `grunt-cli` installed. Execute `npm install -g grunt-cli` in case you don't have it already
 
 ## Installation
 
