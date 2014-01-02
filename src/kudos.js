@@ -81,7 +81,7 @@
         };
 
         Kudoable.prototype.isKudoed = function(){
-            return this.currentCount() >= 1;
+            return this.element.hasClass('complete');
         };
 
         Kudoable.prototype.setCount = function(count){
