@@ -1,5 +1,7 @@
 describe('The Kudoable element', function(){
 
+    var clock;
+
     beforeEach(function(){
         //add a dom element to test upon
         var $fixture = $('<div>')
@@ -7,10 +9,15 @@ describe('The Kudoable element', function(){
         $('body').append($fixture);
 
         this._fixture = $fixture;
+
+        //setup sinon fake timers
+        clock = sinon.useFakeTimers();
     });
 
     afterEach(function(){
         this._fixture.remove();
+
+        clock.restore();
     });
 
     it('should have a fixture available', function(){
@@ -27,6 +34,20 @@ describe('The Kudoable element', function(){
 
         // assert
         expect(this._fixture.hasClass('active')).toBe(true);
-    })
+    });
+
+    it('should not have the active class after 700 ms', function(){
+        var kudoable = this._fixture.kudoable();
+        kudoable.trigger('touchstart');
+
+        // act & assert
+        clock.tick(699);
+        expect(this._fixture.hasClass('active')).toBe(true);  
+
+        clock.tick(1);
+        expect(this._fixture.hasClass('active')).toBe(false);  
+    });
+
+    
 
 });
