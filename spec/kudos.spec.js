@@ -16,8 +16,10 @@ describe('The Kudoable element', function(){
         var $fixture = $('<div>')
                         .addClass('js-fixture');
         $('body').append($fixture);
-
         fixture = $fixture;
+
+        // make sure we reset everything
+        $.jStorage.set(document.location.pathname, false);
 
         //instantiate the kudoable element
         kudoable = fixture.kudoable();
@@ -32,12 +34,28 @@ describe('The Kudoable element', function(){
         clock.restore();
     });
 
-    describe('when instantiating', function(){
+    describe('when initializing', function(){
+        
         it('should render the basic template', function(){
             // just some queries to make sure we render something
             expect(fixture.find('.kudobject').length).toBe(1);
             expect(fixture.find('.opening').length).toBe(1);
             expect(fixture.find('.count').length).toBe(1);
+        });
+
+        it('should be kudoable by default', function(){
+            expect(fixture.hasClass('complete')).toBe(false, 'there is no complete class');
+        });
+
+        it('should restore the state of the kudo', function(){
+            // manually inject the state as if the kudo has already been applied
+            $.jStorage.set(document.location.pathname, true);
+
+            // use a separate in-memory kudo element
+            var kudoElement = $('<figure>');
+            kudoElement.kudoable();
+
+            expect(kudoElement.hasClass('complete')).toBe(true);
         });
     });
 
@@ -62,13 +80,13 @@ describe('The Kudoable element', function(){
             expect(fixture.hasClass('active')).toBe(false);  
         });
 
-        it('should return to its initial state when interrupting the touching', function(){
+        it('should return to its initial state after interrupting the touching', function(){
             kudoable.trigger('touchend');
 
             clock.tick(700);
 
-            expect(fixture.hasClass('complete')).toBe(false);
-            expect(fixture.hasClass('active')).toBe(false); 
+            expect(fixture.hasClass('complete')).toBe(false, 'there is no complete class');
+            expect(fixture.hasClass('active')).toBe(false, 'there is no active class'); 
         });
 
     });
@@ -98,7 +116,7 @@ describe('The Kudoable element', function(){
             kudoable.trigger('mouseleave');
             clock.tick(700);
 
-            expect(fixture.hasClass('complete')).toBe(false);
+            expect(fixture.hasClass('complete')).toBe(false, 'there is no complete class');
             expect(fixture.hasClass('active')).toBe(false); 
         });
 
@@ -129,6 +147,14 @@ describe('The Kudoable element', function(){
 
             expect(getKudoCount()).toBe(1);
         });
+
+        it('should remember the kudo state even after refreshes', function(){
+            completeKudo();
+
+            // should have stored the kudoing with the current url in the localStorage
+            expect($.jStorage.get(document.location.pathname)).toBe(true);
+        });
+
     });
 
     describe('when clicking on a previously kudoed element', function(){
@@ -140,11 +166,16 @@ describe('The Kudoable element', function(){
         });
 
         it('should undo the previously added kudo', function(){
-            expect(fixture.hasClass('complete')).toBe(false);
+            expect(fixture.hasClass('complete')).toBe(false, 'there is no complete class');
         });
 
         it('should decrement the count', function(){
             expect(getKudoCount()).toBe(0);
+        });
+
+        it('should remember the undoing of the kudo even after refreshes', function(){
+            // should have stored the kudoing with the current url in the localStorage
+            expect($.jStorage.get(document.location.pathname)).toBe(false);
         });
 
     });

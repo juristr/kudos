@@ -1,9 +1,10 @@
-(function($, undefined){
+(function($, browserStore, undefined){
 
     var Kudoable,
         __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
     Kudoable = (function() {
+        var key = document.location.pathname;
 
         function Kudoable(element){
             this.element = element;
@@ -13,15 +14,21 @@
             this.complete = __bind(this.complete, this);
             this.undo = __bind(this.undo, this);
 
-            // hook on the events
+            // hook on the mouse and touch events
             $(document).on('touchstart', this.element, this.start);
             $(document).on('touchend', this.element, this.stop);
             this.element.mouseenter(this.start);
             this.element.mouseleave(this.stop);
-
             this.element.click(this.undo);
 
+            // init
             this.render();
+            this.$counter = this.element.find('.count .num');
+
+            if(browserStore.get(key) === true){
+                // set to complete
+                this.element.addClass('complete');
+            }
         }
 
         Kudoable.prototype.render = function(){
@@ -55,16 +62,18 @@
             this.stop();
 
             this.incrementCount();
+            browserStore.set(key, true);
             this.element.addClass('complete');
         };
 
         Kudoable.prototype.undo = function(){
             this.decrementCount();
+            browserStore.set(key, false);
             this.element.removeClass('complete');
         };
 
         Kudoable.prototype.currentCount = function(){
-            var count = parseInt(this.element.find('.count .num').html(), 10);
+            var count = parseInt(this.$counter.html(), 10);
             if(isNaN(count))
                 count = 0;
 
@@ -76,7 +85,7 @@
         };
 
         Kudoable.prototype.setCount = function(count){
-            this.element.find('.count .num').html(count);
+            this.$counter.html(count);
         };
 
         Kudoable.prototype.incrementCount = function(){
@@ -99,4 +108,4 @@
         };
     })
 
-})(jQuery);
+})(jQuery, $.jStorage);
