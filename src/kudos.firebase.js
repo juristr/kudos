@@ -11,7 +11,7 @@
 
     //retrieve the current kudo count
     $.getJSON(firebaseUrl + '/' + key + ".json", function(result){
-        if(result[key]){
+        if(result && result[key]){
             updateKudoCount(result[key].count);
         }
     });
@@ -27,7 +27,9 @@
     // listening for updates
     var kudoEntry = new Firebase(firebaseUrl + key);
     kudoEntry.on('value', function(snapshot){
-        updateKudoCount(snapshot.val()[key].count);
+        if(snapshot && snapshot.val()){
+            updateKudoCount(snapshot.val()[key].count);
+        }
     });
 
 })(jQuery);
