@@ -1,7 +1,7 @@
 (function($, undefined){
 
     var Kudoable,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+        __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
     Kudoable = (function() {
 
@@ -12,8 +12,11 @@
             this.stop = __bind(this.stop, this);
             this.complete = __bind(this.complete, this);
 
+            // hook on the events
             $(document).on('touchstart', this.element, this.start);
             $(document).on('touchend', this.element, this.stop);
+            this.element.mouseenter(this.start);
+            this.element.mouseleave(this.stop);
         }
 
         Kudoable.prototype.start = function(){
@@ -21,10 +24,12 @@
             
             this.element.addClass('active');
 
-            setTimeout(this.complete, 700);
+            this.activationTimer = setTimeout(this.complete, 700);
         };
 
         Kudoable.prototype.stop = function(){
+            clearTimeout(this.activationTimer);
+
             this.element.removeClass('active');
         };
 
