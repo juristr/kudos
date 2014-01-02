@@ -1,22 +1,30 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="assets/kudos.css">    
+    <script type="text/javascript" src="vendor/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript" src="src/kudos.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/kudos.css">
+
+    <script type="text/javascript">
+    $(function(){
+        $('figure').kudoable();
+    });
+    </script>
 </head>
 <body>
 <h1>Firebase Kudos</h1>
 
-
 <hr/>
 
-<figure class="kudo kudoable" data-id="1"> 
+<figure class="kudo"> 
     <a class="kudobject">
         <div class="opening">
             <div class="circle">&nbsp;</div>
         </div>
     </a>
     <a href="#kudo" class="count">
-        <span class="num">52</span>
+        <span class="num"></span>
         <span class="txt">Kudos</span>
     </a>
 </figure>
