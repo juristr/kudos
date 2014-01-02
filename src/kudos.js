@@ -63,7 +63,7 @@
 
             this.incrementCount();
             browserStore.set(key, true);
-            this.element.trigger('kudo:added', { count: this.currentCount() });
+            this.element.trigger('kudo.added', { count: this.currentCount() });
 
             this.element.addClass('complete');
         };
@@ -72,7 +72,7 @@
             if(this.isKudoed()){
                 this.decrementCount();
                 browserStore.set(key, false);
-                this.element.trigger('kudo:removed', { count: this.currentCount() });
+                this.element.trigger('kudo.removed', { count: this.currentCount() });
 
                 this.element.removeClass('complete');
             }

@@ -6,7 +6,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     jasmine: {
-      src: "src/**/*.js",
+      src: "src/kudos.js",
       options: {
         specs: "spec/*.js",
         vendor: "vendor/**/*.js"
