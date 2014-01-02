@@ -67,9 +67,11 @@
         };
 
         Kudoable.prototype.undo = function(){
-            this.decrementCount();
-            browserStore.set(key, false);
-            this.element.removeClass('complete');
+            if(this.isKudoed()){
+                this.decrementCount();
+                browserStore.set(key, false);
+                this.element.removeClass('complete');
+            }
         };
 
         Kudoable.prototype.currentCount = function(){

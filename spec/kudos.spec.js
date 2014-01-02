@@ -157,7 +157,7 @@ describe('The Kudoable element', function(){
 
     });
 
-    describe('when clicking on a previously kudoed element', function(){
+    describe('when clicking on the kudo element', function(){
 
         beforeEach(function(){
             completeKudo();
@@ -170,6 +170,12 @@ describe('The Kudoable element', function(){
         });
 
         it('should decrement the count', function(){
+            expect(getKudoCount()).toBe(0);
+        });
+
+        it('should do nothing if the element has not been kudoed before', function(){
+            fixture.trigger('click');
+
             expect(getKudoCount()).toBe(0);
         });
 
