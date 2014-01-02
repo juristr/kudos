@@ -65,6 +65,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('default', [
     'clean',
+    'test',
     'copy',
     'uglify',
     'cssmin'
