@@ -24,14 +24,14 @@ This should install the required packages and then compress the required files a
 First you need to create a [Firebase account](https://www.firebase.com/) and to create a new database. You can obviously also reuse an existing one if you want so.
 
 **Step 2 - Include kudo scripts**  
-Include the kudo scripts on this site here
+Include the kudo scripts from the `dist` directory
 
 ```html
-<script type="text/javascript" src="vendor/jstorage.js"></script>
+<script type="text/javascript" src="jstorage.min.js"></script>
 <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-<script type="text/javascript" src="src/kudos.js"></script>
-<script type="text/javascript" src="src/kudos.firebase.js"></script>
-<link rel="stylesheet" type="text/css" href="src/kudos.css">
+<script type="text/javascript" src="kudos.min.js"></script>
+<script type="text/javascript" src="kudos.firebase.js"></script>
+<link rel="stylesheet" type="text/css" href="kudos.min.css">
 ```
 
 Note that you need to have jQuery as well.
@@ -45,7 +45,7 @@ var firebaseUrl = 'https://<yourdb>.firebaseio.com/kudos',
 ...
 ```
 
-**Step 4 - Init your kudo element**  
+**Step 4 - Add HTML snippet**  
 As the last step include the following snippet
 
 ```html
@@ -56,7 +56,7 @@ As the last step include the following snippet
 in your DOM where you'd like to have the kudo element appear and initialize it by invoking
 
 ```javascript
-$('figure').kudoable();
+$('figure.kudo').kudoable();
 ```
 
 That's it. You should be ready to go.
