@@ -158,8 +158,9 @@ describe('The Kudoable element', function(){
         it('should fire a kudo:added event', function(){
             var eventFired = false;
 
-            fixture.bind('kudo:added', function(){
+            fixture.bind('kudo:added', function(e, data){
                 eventFired = true;
+                expect(data.count).toBeDefined();
             });
 
             completeKudo();
@@ -173,8 +174,10 @@ describe('The Kudoable element', function(){
         var eventFired = false;
 
         beforeEach(function(){
-            fixture.bind('kudo:removed', function(){
+            fixture.bind('kudo:removed', function(e, data){
                 eventFired = true;
+
+                expect(data.count).toBeDefined();
             });
 
             completeKudo();
