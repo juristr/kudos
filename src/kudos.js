@@ -38,11 +38,11 @@
         };
 
         Kudoable.prototype.start = function(){
-            var self = this;
-            
-            this.element.addClass('active');
+            if(!this.isKudoed()){
+                this.element.addClass('active');
 
-            this.activationTimer = setTimeout(this.complete, 700);
+                this.activationTimer = setTimeout(this.complete, 700);
+            }
         };
 
         Kudoable.prototype.stop = function(){
@@ -59,6 +59,7 @@
         };
 
         Kudoable.prototype.undo = function(){
+            this.decrementCount();
             this.element.removeClass('complete');
         };
 
@@ -70,12 +71,20 @@
             return count;
         };
 
+        Kudoable.prototype.isKudoed = function(){
+            return this.currentCount() >= 1;
+        };
+
         Kudoable.prototype.setCount = function(count){
             this.element.find('.count .num').html(count);
         };
 
         Kudoable.prototype.incrementCount = function(){
             this.setCount(this.currentCount() + 1);
+        };
+
+        Kudoable.prototype.decrementCount = function(){
+            this.setCount(this.currentCount() - 1);
         };
 
         return Kudoable;

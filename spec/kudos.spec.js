@@ -6,6 +6,9 @@ describe('The Kudoable element', function(){
         completeKudo = function(){
             kudoable.trigger('touchstart');
             clock.tick(700);
+        },
+        getKudoCount = function(){
+            return parseInt(fixture.find('.count .num').html(),10);
         };
 
     beforeEach(function(){
@@ -113,13 +116,15 @@ describe('The Kudoable element', function(){
         });
 
         it('should increment the kudo count', function(){
-
-            var getKudoCount = function(){
-                return parseInt(fixture.find('.count .num').html(),10);
-            };
-
             var actualCount = getKudoCount();
 
+            completeKudo();
+
+            expect(getKudoCount()).toBe(1);
+        });
+
+        it('cannot twice complete an already kudoed element', function(){
+            completeKudo();
             completeKudo();
 
             expect(getKudoCount()).toBe(1);
@@ -136,6 +141,10 @@ describe('The Kudoable element', function(){
 
         it('should undo the previously added kudo', function(){
             expect(fixture.hasClass('complete')).toBe(false);
+        });
+
+        it('should decrement the count', function(){
+            expect(getKudoCount()).toBe(0);
         });
 
     });
