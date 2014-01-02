@@ -155,13 +155,29 @@ describe('The Kudoable element', function(){
             expect($.jStorage.get(document.location.pathname)).toBe(true);
         });
 
+        it('should fire a kudo:added event', function(){
+            var eventFired = false;
+
+            fixture.bind('kudo:added', function(){
+                eventFired = true;
+            });
+
+            completeKudo();
+
+            expect(eventFired).toBe(true);
+        });
     });
 
     describe('when clicking on the kudo element', function(){
 
-        beforeEach(function(){
-            completeKudo();
+        var eventFired = false;
 
+        beforeEach(function(){
+            fixture.bind('kudo:removed', function(){
+                eventFired = true;
+            });
+
+            completeKudo();
             fixture.trigger('click');
         });
 
@@ -172,6 +188,10 @@ describe('The Kudoable element', function(){
         it('should decrement the count', function(){
             expect(getKudoCount()).toBe(0);
         });
+
+        it('should fire a kudo:removed event', function(){
+            expect(eventFired).toBe(true);
+        });        
 
         it('should do nothing if the element has not been kudoed before', function(){
             fixture.trigger('click');

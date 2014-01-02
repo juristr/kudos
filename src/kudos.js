@@ -63,6 +63,8 @@
 
             this.incrementCount();
             browserStore.set(key, true);
+            this.element.trigger('kudo:added');
+
             this.element.addClass('complete');
         };
 
@@ -70,6 +72,8 @@
             if(this.isKudoed()){
                 this.decrementCount();
                 browserStore.set(key, false);
+                this.element.trigger('kudo:removed');
+
                 this.element.removeClass('complete');
             }
         };
