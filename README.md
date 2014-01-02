@@ -1,4 +1,4 @@
-Kudo (for Firebase)
+Kudo (for Firebase)[![Build Status](https://travis-ci.org/juristr/firebase-kudos.png?branch=master)](https://travis-ci.org/juristr/firebase-kudos) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ---
 
 This project started as a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
