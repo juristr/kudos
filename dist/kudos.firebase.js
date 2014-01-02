@@ -1,7 +1,8 @@
 (function($, undefined){
 
+    // replace this url with yours!!
     var firebaseUrl = 'https://firekudos.firebaseio.com/kudos',
-        key = encodeURIComponent(document.location.pathname),
+        key = document.location.pathname.replace(/[\/-]/g,''),
         kudoStore = new Firebase(firebaseUrl);
 
     // slightly hacky way of updating the count
@@ -11,8 +12,8 @@
 
     //retrieve the current kudo count
     $.getJSON(firebaseUrl + '/' + key + ".json", function(result){
-        if(result[key]){
-            updateKudoCount(result[key].count);
+        if(result && result.count){
+            updateKudoCount(result.count);
         }
     });
 
@@ -25,9 +26,11 @@
     });
 
     // listening for updates
-    var kudoEntry = new Firebase(firebaseUrl + key);
+    var kudoEntry = new Firebase(firebaseUrl + '/' + key);
     kudoEntry.on('value', function(snapshot){
-        updateKudoCount(snapshot.val()[key].count);
+        if(snapshot && snapshot.val()){
+            updateKudoCount(snapshot.val().count);
+        }
     });
 
 })(jQuery);

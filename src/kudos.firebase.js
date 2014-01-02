@@ -1,7 +1,7 @@
 (function($, undefined){
 
     var firebaseUrl = 'https://firekudos.firebaseio.com/kudos',
-        key = encodeURIComponent(document.location.pathname),
+        key = document.location.pathname.replace(/[\/-]/g,''),
         kudoStore = new Firebase(firebaseUrl);
 
     // slightly hacky way of updating the count
