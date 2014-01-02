@@ -2,7 +2,11 @@ describe('The Kudoable element', function(){
 
     var clock,
         fixture,
-        kudoable;
+        kudoable,
+        completeKudo = function(){
+            kudoable.trigger('touchstart');
+            clock.tick(700);
+        };
 
     beforeEach(function(){
         //add a dom element to test upon
@@ -93,11 +97,24 @@ describe('The Kudoable element', function(){
         it('should add the complete class to the element it is bound to', function(){
             
             // act
-            kudoable.trigger('touchstart');
-            clock.tick(700);
+           completeKudo();
 
             //assert
             expect(fixture.hasClass('complete')).toBe(true);
+        });
+
+    });
+
+    describe('when clicking on a previously kudoed element', function(){
+
+        beforeEach(function(){
+            completeKudo();
+
+            fixture.trigger('click');
+        });
+
+        it('should undo the previously added kudo', function(){
+            expect(fixture.hasClass('complete')).toBe(false);
         });
 
     });
