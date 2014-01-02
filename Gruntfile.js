@@ -1,10 +1,12 @@
 module.exports = function (grunt) {
   "use strict";
  
-  
+  // load all grunt tasks matching the `grunt-*` pattern
+  require('load-grunt-tasks')(grunt);
  
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    
     jasmine: {
       src: "src/kudos.js",
       options: {
@@ -12,6 +14,7 @@ module.exports = function (grunt) {
         vendor: "vendor/**/*.js"
       }
     },
+    
     connect: {
       server: {
         options: {
@@ -20,12 +23,50 @@ module.exports = function (grunt) {
           keepalive: true
         }
       }
+    },
+
+    clean: ['dist'],
+
+    copy: {
+      dist: {
+        expand: true,
+        flatten: true,
+        src: ['src/*', 'vendor/jquery-*'],
+        dest: 'dist/'
+      }
+    },
+
+    uglify: {
+      dist: {
+        files: {
+          'dist/kudos.min.js': ['src/kudos.js'],
+          'dist/jstorage.min.js': ['vendor/jstorage.js']
+        }
+      }
+    },
+
+    cssmin: {
+      css: {
+        src: 'dist/kudos.css',
+        dest: 'dist/kudos.min.css'
+      }
     }
+
   })
  
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks("grunt-contrib-jasmine")
+  //grunt.loadTasks('tasks');
+
+  // grunt.loadNpmTasks('grunt-contrib-copy')
+  // grunt.loadNpmTasks('grunt-contrib-connect')
+  // grunt.loadNpmTasks("grunt-contrib-jasmine")
 
   grunt.registerTask("test", ["jasmine"])
   grunt.registerTask("server", "connect:server")
+
+  grunt.registerTask('default', [
+    'clean',
+    'copy',
+    'uglify',
+    'cssmin'
+  ])
 };
