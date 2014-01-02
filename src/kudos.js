@@ -70,7 +70,10 @@
 
         Kudoable.prototype.undo = function(){
             if(this.isKudoed()){
-                this.decrementCount();
+                if(this.currentCount() > 0){
+                    this.decrementCount();
+                }
+
                 browserStore.set(key, false);
                 this.element.trigger('kudo.removed', { count: this.currentCount() });
 

@@ -207,6 +207,23 @@ describe('The Kudoable element', function(){
             expect($.jStorage.get(document.location.pathname)).toBe(false);
         });
 
+        it('should not be able to have a negative kudo count', function(){
+            // create a new kudo element and simulate an odd situation where the
+            // count is 0 and you have already kudoed the element
+            
+            var kudoElement = $('<figure>');
+            kudoElement.kudoable();
+
+            kudoElement.find('.count .num').html(0); //set 0 count
+            kudoElement.addClass('complete');
+
+            // act
+            kudoElement.trigger('click');
+
+            expect(kudoElement.find('.count .num').html()).toBe('0');
+            expect(kudoElement.hasClass('complete')).toBe(false);
+        });
+
     });
 
 });
