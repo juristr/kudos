@@ -1,8 +1,17 @@
 module.exports = function (grunt) {
+  "use strict";
  
-  grunt.loadNpmTasks('grunt-contrib-connect');
+  
  
   grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    jasmine: {
+      src: "src/**/*.js",
+      options: {
+        specs: "spec/*.js",
+        vendor: "vendor/**/*.js"
+      }
+    },
     connect: {
       server: {
         options: {
@@ -14,5 +23,9 @@ module.exports = function (grunt) {
     }
   })
  
+  grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks("grunt-contrib-jasmine")
+
+  grunt.registerTask("test", ["jasmine"])
   grunt.registerTask("server", "connect:server")
 };
