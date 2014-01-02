@@ -29,6 +29,15 @@ describe('The Kudoable element', function(){
         clock.restore();
     });
 
+    describe('when instantiating', function(){
+        it('should render the basic template', function(){
+            // just some queries to make sure we render something
+            expect(fixture.find('.kudobject').length).toBe(1);
+            expect(fixture.find('.opening').length).toBe(1);
+            expect(fixture.find('.count').length).toBe(1);
+        });
+    });
+
     describe('when touching', function(){
 
         beforeEach(function(){
@@ -92,17 +101,29 @@ describe('The Kudoable element', function(){
 
     });
 
-    describe('when completing', function(){
+    describe('when completing a kudo', function(){
 
         it('should add the complete class to the element it is bound to', function(){
             
             // act
-           completeKudo();
+            completeKudo();
 
             //assert
             expect(fixture.hasClass('complete')).toBe(true);
         });
 
+        it('should increment the kudo count', function(){
+
+            var getKudoCount = function(){
+                return parseInt(fixture.find('.count .num').html(),10);
+            };
+
+            var actualCount = getKudoCount();
+
+            completeKudo();
+
+            expect(getKudoCount()).toBe(1);
+        });
     });
 
     describe('when clicking on a previously kudoed element', function(){

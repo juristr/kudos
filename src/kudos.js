@@ -20,7 +20,22 @@
             this.element.mouseleave(this.stop);
 
             this.element.click(this.undo);
+
+            this.render();
         }
+
+        Kudoable.prototype.render = function(){
+            var template = $('<a class="kudobject">' + 
+                                    '<div class="opening">' + 
+                                        '<div class="circle">&nbsp;</div>' + 
+                                    '</div>' + 
+                                '</a>' + 
+                                '<a href="#kudo" class="count">' + 
+                                    '<span class="num">0</span>' + 
+                                    '<span class="txt">Kudos</span>' + 
+                                '</a>');
+            this.element.append(template);
+        };
 
         Kudoable.prototype.start = function(){
             var self = this;
@@ -38,11 +53,29 @@
 
         Kudoable.prototype.complete = function(){
             this.stop();
+
+            this.incrementCount();
             this.element.addClass('complete');
         };
 
         Kudoable.prototype.undo = function(){
             this.element.removeClass('complete');
+        };
+
+        Kudoable.prototype.currentCount = function(){
+            var count = parseInt(this.element.find('.count .num').html(), 10);
+            if(isNaN(count))
+                count = 0;
+
+            return count;
+        };
+
+        Kudoable.prototype.setCount = function(count){
+            this.element.find('.count .num').html(count);
+        };
+
+        Kudoable.prototype.incrementCount = function(){
+            this.setCount(this.currentCount() + 1);
         };
 
         return Kudoable;
