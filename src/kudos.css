@@ -49,12 +49,12 @@ figure{
 	margin-top:20px;
 }
 figure.kudo{
-	/*#position: absolute;
+	#position: absolute;
     margin-left: 90%;
 	right: 50%;
 	margin-right: -30px;
     margin-bottom: 5px;
-	top: 3px;*/
+	top: 3px;
 	text-align:center;
 }
 /*figure.kudo article a.kudobject p{text-align:center;display:block;margin:0;padding:0;line-height:50px;width:auto;height:auto}*/

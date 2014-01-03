@@ -1,5 +1,6 @@
 (function($, undefined){
 
+    // replace this url with yours!!
     var firebaseUrl = 'https://firekudos.firebaseio.com/kudos',
         key = document.location.pathname.replace(/[\/-]/g,''),
         kudoStore = new Firebase(firebaseUrl);
@@ -9,10 +10,16 @@
         $('.count .num').html(count);
     };
 
+    // fix for locla debugging
+    if(key === ''){
+        key = 'localhost'
+    }
+
     //retrieve the current kudo count
     $.getJSON(firebaseUrl + '/' + key + ".json", function(result){
-        if(result && result[key]){
-            updateKudoCount(result[key].count);
+        if(result){
+            result.count = result.count || 0;
+            updateKudoCount(result.count);
         }
     });
 
@@ -25,10 +32,10 @@
     });
 
     // listening for updates
-    var kudoEntry = new Firebase(firebaseUrl + key);
+    var kudoEntry = new Firebase(firebaseUrl + '/' + key);
     kudoEntry.on('value', function(snapshot){
         if(snapshot && snapshot.val()){
-            updateKudoCount(snapshot.val()[key].count);
+            updateKudoCount(snapshot.val().count);
         }
     });
 

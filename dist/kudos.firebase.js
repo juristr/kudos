@@ -10,9 +10,15 @@
         $('.count .num').html(count);
     };
 
+    // fix for locla debugging
+    if(key === ''){
+        key = 'localhost'
+    }
+
     //retrieve the current kudo count
     $.getJSON(firebaseUrl + '/' + key + ".json", function(result){
-        if(result && result.count){
+        if(result){
+            result.count = result.count || 0;
             updateKudoCount(result.count);
         }
     });
