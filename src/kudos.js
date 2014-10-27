@@ -7,6 +7,8 @@
         var key = document.location.pathname;
 
         function Kudoable(element){
+            var self = this;
+
             this.element = element;
 
             this.start = __bind(this.start, this);
@@ -25,21 +27,28 @@
             this.render();
             this.$counter = this.element.find('.count .num');
 
-            if(browserStore.get(key) === true){
-                // set to complete
-                this.element.addClass('complete');
-            }
+            browserStore.hasVoted()
+                .then(function(hasVoted){
+                    if(hasVoted){
+                        // set to complete
+                        self.element.addClass('complete');
+                    }
+                });
+
+            browserStore.onKudoUpdates(function(kudoCount){
+                self.setCount(kudoCount);
+            });
         }
 
         Kudoable.prototype.render = function(){
-            var template = $('<a class="kudobject">' + 
-                                    '<div class="opening">' + 
-                                        '<div class="circle">&nbsp;</div>' + 
-                                    '</div>' + 
-                                '</a>' + 
-                                '<a href="#kudo" class="count">' + 
-                                    '<span class="num">0</span>' + 
-                                    '<span class="txt">Kudos</span>' + 
+            var template = $('<a class="kudobject">' +
+                                    '<div class="opening">' +
+                                        '<div class="circle">&nbsp;</div>' +
+                                    '</div>' +
+                                '</a>' +
+                                '<a href="#kudo" class="count">' +
+                                    '<span class="num">0</span>' +
+                                    '<span class="txt">Kudos</span>' +
                                 '</a>');
             this.element.append(template);
         };
@@ -61,21 +70,21 @@
         Kudoable.prototype.complete = function(){
             this.stop();
 
-            this.incrementCount();
-            browserStore.set(key, true);
-            this.element.trigger('kudo.added', { count: this.currentCount() });
+            // this.incrementCount();
+            browserStore.addKudo();
+            // this.element.trigger('kudo.added', { count: this.currentCount() });
 
             this.element.addClass('complete');
         };
 
         Kudoable.prototype.undo = function(){
             if(this.isKudoed()){
-                if(this.currentCount() > 0){
-                    this.decrementCount();
-                }
+                // if(this.currentCount() > 0){
+                //     this.decrementCount();
+                // }
 
-                browserStore.set(key, false);
-                this.element.trigger('kudo.removed', { count: this.currentCount() });
+                browserStore.removeKudo();
+                // this.element.trigger('kudo.removed', { count: this.currentCount() });
 
                 this.element.removeClass('complete');
             }
@@ -97,13 +106,13 @@
             this.$counter.html(count);
         };
 
-        Kudoable.prototype.incrementCount = function(){
-            this.setCount(this.currentCount() + 1);
-        };
+        // Kudoable.prototype.incrementCount = function(){
+        //     this.setCount(this.currentCount() + 1);
+        // };
 
-        Kudoable.prototype.decrementCount = function(){
-            this.setCount(this.currentCount() - 1);
-        };
+        // Kudoable.prototype.decrementCount = function(){
+        //     this.setCount(this.currentCount() - 1);
+        // };
 
         return Kudoable;
 
@@ -117,4 +126,4 @@
         };
     })
 
-})(jQuery, $.jStorage);
+})(jQuery, window.kudoStore);

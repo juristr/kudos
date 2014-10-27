@@ -1,12 +1,12 @@
 module.exports = function (grunt) {
   "use strict";
- 
+
   // load all grunt tasks matching the `grunt-*` pattern
   require('load-grunt-tasks')(grunt);
- 
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    
+
     jasmine: {
       src: "src/kudos.js",
       options: {
@@ -14,7 +14,7 @@ module.exports = function (grunt) {
         vendor: "vendor/**/*.js"
       }
     },
-    
+
     connect: {
       server: {
         options: {
@@ -39,8 +39,7 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'dist/kudos.min.js': ['src/kudos.js'],
-          'dist/jstorage.min.js': ['vendor/jstorage.js']
+          'dist/kudos.min.js': ['src/kudos.js']
         }
       }
     },
@@ -53,7 +52,7 @@ module.exports = function (grunt) {
     }
 
   })
- 
+
   //grunt.loadTasks('tasks');
 
   // grunt.loadNpmTasks('grunt-contrib-copy')
