@@ -1,4 +1,4 @@
-(function($, browserStore, undefined){
+(function($, undefined){
 
     var Kudoable,
         __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
@@ -6,10 +6,11 @@
     Kudoable = (function() {
         var key = document.location.pathname;
 
-        function Kudoable(element){
+        function Kudoable(element, options){
             var self = this;
 
             this.element = element;
+            this.dataStore = options.dataStore;
 
             this.start = __bind(this.start, this);
             this.stop = __bind(this.stop, this);
@@ -27,7 +28,7 @@
             this.render();
             this.$counter = this.element.find('.count .num');
 
-            browserStore.hasVoted()
+            this.dataStore.hasVoted()
                 .then(function(hasVoted){
                     if(hasVoted){
                         // set to complete
@@ -35,7 +36,7 @@
                     }
                 });
 
-            browserStore.onKudoUpdates(function(kudoCount){
+            this.dataStore.onKudoUpdates(function(kudoCount){
                 self.setCount(kudoCount);
             });
         }
@@ -71,7 +72,7 @@
             this.stop();
 
             // this.incrementCount();
-            browserStore.addKudo();
+            this.dataStore.addKudo();
             // this.element.trigger('kudo.added', { count: this.currentCount() });
 
             this.element.addClass('complete');
@@ -83,7 +84,7 @@
                 //     this.decrementCount();
                 // }
 
-                browserStore.removeKudo();
+                this.dataStore.removeKudo();
                 // this.element.trigger('kudo.removed', { count: this.currentCount() });
 
                 this.element.removeClass('complete');
@@ -119,11 +120,11 @@
     })();
 
     $(function(){
-        $.fn.kudoable = function() {
+        $.fn.kudoable = function(options) {
             return this.each(function(){
-                return new Kudoable($(this));
+                return new Kudoable($(this), options);
             });
         };
     })
 
-})(jQuery, window.kudoStore);
+})(jQuery);

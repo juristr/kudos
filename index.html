@@ -9,7 +9,9 @@
 
     <script type="text/javascript">
     $(function(){
-        $('figure').kudoable();
+        $('figure').kudoable({
+            dataStore: window.firebaseStorage
+        });
     });
     </script>
 </head>

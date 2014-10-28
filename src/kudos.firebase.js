@@ -85,6 +85,6 @@
         onKudoUpdates: onKudoUpdates
     };
 
-    exports.kudoStore = firebaseStorage;
+    exports.firebaseStorage = firebaseStorage;
 
 })(window);
