@@ -39,7 +39,8 @@ module.exports = function (grunt) {
     uglify: {
       dist: {
         files: {
-          'dist/kudos.min.js': ['src/kudos.js']
+          'dist/kudos.min.js': ['src/kudos.js'],
+          'dist/kudos.firebase.min.js': ['src/kudos.firebase.js']
         }
       }
     },
