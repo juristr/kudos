@@ -5,6 +5,10 @@ This project started as a small, snowy afternoon project with the aim to experim
 
 The idea is to give people with [Jekyll](http://jekyllrb.com) blogs Kudo support which originally (as far as I know) has been introduced on the [Svbtle blog](https://svbtle.com/) engine.
 
+## Demo
+
+You can see the script live on my blog at [http://juristr.com/blog](http://juristr.com/blog).
+
 ## Building
 
 Just clone the repo and execute
@@ -20,30 +24,64 @@ This should install the required packages and then compress the required files a
 
 ## Installation
 
+Follow these steps to setup kudos for your site.
+
 **Step 1 - Firebase account**  
-First you need to create a [Firebase account](https://www.firebase.com/) and to create a new database. You can obviously also reuse an existing one if you want so.
+This kudo script uses Firebase as the backend data store. As such, you first need to create a [Firebase account](https://www.firebase.com/) and create a new database. You can obviously also reuse an existing one if you want so.
 
-**Step 2 - Include kudo scripts**  
-Include the kudo scripts from the `dist` directory
-
-```html
-<script type="text/javascript" src="jstorage.min.js"></script>
-<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
-<script type="text/javascript" src="kudos.min.js"></script>
-<script type="text/javascript" src="kudos.firebase.js"></script>
-<link rel="stylesheet" type="text/css" href="kudos.min.css">
-```
-
-Note that you need to have jQuery as well.
-
-**Step 3 - Configure Firebase**  
-Open `kudos.firebase.js` and change the `firebaseUrl` to have it point to the one you just created in step 1.
+**Step 2 - Configure Firebase**  
+Open `kudos.firebase.min.js` (or the non-minified `kudos.firebase.js`) and change the `firebaseUrl` to have it point to the one you just created in step 1.
 
 ```javascript
 ...
-var firebaseUrl = 'https://<yourdb>.firebaseio.com/kudos',
+// replace this url with yours!!
+var firebase = new Firebase('https://<yourdb>.firebaseio.com/'),
+    firebaseKudos = firebase.child('kudos'),
+    ...
 ...
 ```
+
+Next, you need to **configure your Firebase store's authentication** and add proper security rules.
+
+Activate _anonymous authentication_ and configure the authorized domains (normally localhost for debugging and your site's domain name).
+
+![](./firebase_authenticationsettings.png)
+
+Finally you also need to register some **security rules in the "Security & Rules"** section of your Firebase backend. Simply copy&paste the following:
+
+```json
+{
+    "rules": {
+        
+        "kudos": {
+          "$url": {
+            ".read": true,
+            ".write": "data.child('likes').val().length === 0",
+            
+            "likes": {
+              "$userid": {
+                ".read": true,
+                ".write": "auth.uid === $userid"
+              }
+            }
+          }
+        }
+    }
+}
+```
+
+**Step 3 - Include kudo scripts**  
+Include the kudo scripts from the `dist` directory
+
+```html
+<!-- Kudos script -->
+<script type='text/javascript' src='https://cdn.firebase.com/js/client/1.1.2/firebase.js'></script>
+<script type="text/javascript" src="/assets/kudos/kudos.min.js"></script>
+<script type="text/javascript" src="/assets/kudos/kudos.firebase.min.js"></script>
+<link rel="stylesheet" href="/assets/kudos/kudos.min.css">
+```
+
+Note that you need to have jQuery as well.
 
 **Step 4 - Add HTML snippet**  
 As the last step include the following snippet
@@ -56,10 +94,16 @@ As the last step include the following snippet
 in your DOM where you'd like to have the kudo element appear and initialize it by invoking
 
 ```javascript
-$('figure.kudo').kudoable();
+$('figure.kudo').kudoable({
+    dataStore: window.firebaseStorage
+});
 ```
 
 That's it. You should be ready to go.
+
+## Issues, Bugs, Enhancements..
+
+Simply use [GitHub's issues](https://github.com/juristr/kudos-jekyll/issues). PRs are welcome as well :)
 
 ## Credits
 

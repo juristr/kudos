@@ -107,14 +107,6 @@
             this.$counter.html(count);
         };
 
-        // Kudoable.prototype.incrementCount = function(){
-        //     this.setCount(this.currentCount() + 1);
-        // };
-
-        // Kudoable.prototype.decrementCount = function(){
-        //     this.setCount(this.currentCount() - 1);
-        // };
-
         return Kudoable;
 
     })();
