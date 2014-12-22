@@ -76,9 +76,9 @@ Include the kudo scripts from the `dist` directory
 ```html
 <!-- Kudos script -->
 <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.1.2/firebase.js'></script>
-<script type="text/javascript" src="/assets/kudos/kudos.min.js"></script>
-<script type="text/javascript" src="/assets/kudos/kudos.firebase.min.js"></script>
-<link rel="stylesheet" href="/assets/kudos/kudos.min.css">
+<script type="text/javascript" src="/dist/kudos.min.js"></script>
+<script type="text/javascript" src="/dist/kudos.firebase.min.js"></script>
+<link rel="stylesheet" href="/dist/kudos.min.css">
 ```
 
 Note that you need to have jQuery as well.
