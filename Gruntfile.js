@@ -14,6 +14,7 @@ module.exports = function (grunt) {
       ' * @link <%= pkg.homepage %>\n' +
       ' * @author <%= pkg.author.name %>\n' +
       ' * @license MIT License, http://www.opensource.org/licenses/MIT\n' +
+      ' * Original implementation by Amit Upadhyay: http://amitu.com/2013/04/kudos-using-parse-for-jekyll/\n' +
       ' */\n'
     },
 
