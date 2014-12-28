@@ -1,13 +1,13 @@
-Kudo for Jekyll (but not only)[![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+Kudos for your site [![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ---
 
-This project started as a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
+This project started at a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
 
-The idea is to give people with [Jekyll](http://jekyllrb.com) blogs Kudo support which originally (as far as I know) has been introduced on the [Svbtle blog](https://svbtle.com/) engine.
+The idea is to give people Kudo support for their site or blog. Originally Kudos have been introduced by the [Svbtle blog](https://svbtle.com/) engine.
 
 ## Demo
 
-You can see the script live on my blog at [http://juristr.com/blog](http://juristr.com/blog).
+You can see the script live on my own blog at [http://juristr.com/blog](http://juristr.com/blog).
 
 ## Building
 
