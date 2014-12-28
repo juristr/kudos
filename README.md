@@ -1,4 +1,4 @@
-Kudos for your site [![Build Status](https://travis-ci.org/juristr/kudos-jekyll.png?branch=master)](https://travis-ci.org/juristr/kudos-jekyll) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+Kudos for your site [![Build Status](https://travis-ci.org/juristr/kudos.svg?branch=master)](https://travis-ci.org/juristr/kudos) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 ---
 
 This project started at a small, snowy afternoon project with the aim to experiment a little with Jasmine, Firebase, Grunt and Travis-CI integration.
